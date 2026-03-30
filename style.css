@@ -1,78 +1,69 @@
-/* --- LOGO LAYOUT --- */
-.logo-container {
-    margin-bottom: 40px;
+/* --- 1. CORE LAYOUT (REQUIRED FOR CENTERING) --- */
+body {
+    background-color: #ffffff;
+    background-image: 
+        radial-gradient(at 0% 0%, hsla(210,100%,98%,1) 0, transparent 50%), 
+        radial-gradient(at 50% 0%, hsla(220,100%,97%,1) 0, transparent 50%), 
+        radial-gradient(at 100% 0%, hsla(210,100%,98%,1) 0, transparent 50%);
+    font-family: 'Inter', -apple-system, sans-serif;
     display: flex;
     justify-content: center;
-}
-
-.logo-animation-wrapper {
-    position: relative;
-    display: inline-flex;
     align-items: center;
-    white-space: nowrap; 
-    padding: 0 80px; /* Space for the arc start/end */
-    cursor: pointer;
-}
-
-.logo-text {
-    font-size: 2.5rem;
-    font-weight: 800;
-    color: #1a1a1a;
-    letter-spacing: -1.5px;
+    height: 100vh;
     margin: 0;
-    z-index: 2; /* Keeps text in front of the moving icons */
 }
 
-.logo-text span { color: #007bff; }
+.container {
+    background: #ffffff;
+    padding: 3rem;
+    border-radius: 24px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.04), 0 2px 10px rgba(0, 0, 0, 0.02);
+    border: 1px solid #f0f0f0;
+    text-align: center;
+    width: 350px;
+}
 
 /* --- ICON ARC LOGIC --- */
 .sun-icon, .rain-icon {
     position: absolute;
     width: 35px;
     height: 35px;
-    z-index: 1; /* Icons move behind the text */
+    z-index: 1; 
     left: 50%;
     pointer-events: none;
-    /* Both icons follow the same 6-second arc */
+    /* Both use the exact same path so they ghost each other */
     animation: weatherArcPath 6s linear infinite;
-    transition: opacity 0.4s ease;
+    transition: opacity 0.4s ease-in-out; /* Smooth transition */
 }
 
+/* INITIAL STATE: Only Sun is visible */
 .sun-icon {
     color: #ffb703;
-    opacity: 1; /* Sun is visible by default */
+    opacity: 1; 
 }
 
+/* INITIAL STATE: Rain is fully hidden */
 .rain-icon {
     color: #007bff;
-    opacity: 0; /* Rain is hidden by default */
+    opacity: 0; 
 }
 
-/* --- THE HOVER TRANSITION --- */
-/* When hovering over 'SkyAI', the sun hides and the rain appears */
+/* --- HOVER STATE: THE SWITCH --- */
+/* 1. Hide the sun when hovering the title */
 .logo-animation-wrapper:hover .sun-icon {
     opacity: 0;
 }
 
+/* 2. Show the rain when hovering the title */
 .logo-animation-wrapper:hover .rain-icon {
     opacity: 1;
 }
 
-/* --- THE UNIFIED ARC PATH (Above the text) --- */
+/* THE ARC PATH (Stays safely above the SkyAI text) */
 @keyframes weatherArcPath {
-    0% { 
-        transform: translate(-140px, 10px) scale(0.7); 
-        opacity: 0; 
-    }
+    0% { transform: translate(-140px, 10px) scale(0.7); opacity: 0; }
     15% { opacity: 1; }
-    50% { 
-        /* -55px ensures the icon stays ABOVE the 'SkyAI' letters */
-        transform: translate(-50%, -55px) scale(1); 
-        opacity: 1; 
-    }
+    50% { transform: translate(-50%, -55px) scale(1); opacity: 1; }
     85% { opacity: 1; }
-    100% { 
-        transform: translate(140px, 10px) scale(0.7); 
-        opacity: 0; 
-    }
+    100% { transform: translate(140px, 10px) scale(0.7); opacity: 0; }
 }
