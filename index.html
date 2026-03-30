@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My Weather App</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+    <h1 style="color: #1a1a1a; letter-spacing: -1px;">Sky<span style="color: #007bff;">AI</span></h1>
+    <input type="text" id="cityInput" placeholder="Enter city name...">
+    <button id="getWeather">Check Weather</button>
+
+    <div id="forecastOptions" style="display: none; margin-top: 20px; gap: 10px; justify-content: center;">
+    <button onclick="show24h()" class="tab-btn">24h Forecast</button>
+    <button onclick="show30d()" class="tab-btn">30-Day Outlook</button>
+</div>
+
+<div id="weatherDisplay"></div>
+    
+    <div id="weatherDisplay">
+        </div>
+</div>
+    <script src="script.js"></script>
+</body>
+</html>
