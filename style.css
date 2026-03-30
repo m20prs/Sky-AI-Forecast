@@ -1,4 +1,4 @@
-/* --- 1. CORE LAYOUT (REQUIRED FOR CENTERING) --- */
+/* --- 1. CORE LAYOUT --- */
 body {
     background-color: #ffffff;
     background-image: 
@@ -15,55 +15,119 @@ body {
 
 .container {
     background: #ffffff;
-    padding: 3rem;
+    padding: 3.5rem 2.5rem;
     border-radius: 24px;
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.04), 0 2px 10px rgba(0, 0, 0, 0.02);
     border: 1px solid #f0f0f0;
     text-align: center;
     width: 350px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-/* --- ICON ARC LOGIC --- */
+/* --- 2. AUTHOR BADGE --- */
+.author-badge {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    background: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    border-radius: 30px;
+    font-size: 0.8rem;
+    color: #444;
+    font-weight: 500;
+    text-decoration: none;
+    z-index: 100;
+    transition: all 0.2s ease-in-out;
+}
+
+.author-badge:hover {
+    background: rgba(255, 255, 255, 0.9);
+    transform: translateY(-2px);
+    color: #0077b5; /* LinkedIn Blue */
+}
+
+/* --- 3. LOGO & HIGH ARC ANIMATION --- */
+.logo-container {
+    margin-top: 20px;
+    margin-bottom: 50px;
+    display: flex;
+    justify-content: center;
+}
+
+.logo-animation-wrapper {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    white-space: nowrap; 
+    padding: 0 80px; 
+}
+
+.logo-text {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: #1a1a1a;
+    letter-spacing: -1.5px;
+    margin: 0;
+    z-index: 10;
+}
+
+.logo-text span { color: #007bff; }
+
 .sun-icon, .rain-icon {
     position: absolute;
     width: 35px;
     height: 35px;
-    z-index: 1; 
     left: 50%;
     pointer-events: none;
-    /* Both use the exact same path so they ghost each other */
     animation: weatherArcPath 6s linear infinite;
-    transition: opacity 0.4s ease-in-out; /* Smooth transition */
+    transition: opacity 0.1s ease-in-out, visibility 0.1s; 
 }
 
-/* INITIAL STATE: Only Sun is visible */
-.sun-icon {
-    color: #ffb703;
-    opacity: 1; 
-}
+.sun-icon { color: #ffb703; opacity: 1; visibility: visible; z-index: 2; }
+.rain-icon { color: #007bff; opacity: 0; visibility: hidden; z-index: 1; }
 
-/* INITIAL STATE: Rain is fully hidden */
-.rain-icon {
-    color: #007bff;
-    opacity: 0; 
-}
+.logo-animation-wrapper:hover .sun-icon { opacity: 0; visibility: hidden; }
+.logo-animation-wrapper:hover .rain-icon { opacity: 1; visibility: visible; z-index: 3; }
 
-/* --- HOVER STATE: THE SWITCH --- */
-/* 1. Hide the sun when hovering the title */
-.logo-animation-wrapper:hover .sun-icon {
-    opacity: 0;
-}
-
-/* 2. Show the rain when hovering the title */
-.logo-animation-wrapper:hover .rain-icon {
-    opacity: 1;
-}
-
-/* THE ARC PATH (Stays safely above the SkyAI text) */
 @keyframes weatherArcPath {
     0% { transform: translate(-140px, 10px) scale(0.7); opacity: 0; }
     15% { opacity: 1; }
-    50% { transform: translate(-50%, -55px) scale(1); opacity: 1; }
+    50% { transform: translate(-50%, -85px) scale(1.1); opacity: 1; }
     85% { opacity: 1; }
     100% { transform: translate(140px, 10px) scale(0.7); opacity: 0; }
 }
+
+/* --- 4. ALIGNED INPUTS & BUTTONS --- */
+input, button {
+    width: 100%;           
+    max-width: 280px;      
+    box-sizing: border-box;
+    height: 48px;          
+    margin-bottom: 15px;
+    font-size: 0.95rem;
+}
+
+input { 
+    padding: 0 16px; 
+    border: 1.5px solid #eee; 
+    border-radius: 12px; 
+    outline: none;
+}
+
+button { 
+    background: #1a1a1a;
+    color: white; 
+    border: none; 
+    border-radius: 12px; 
+    font-weight: 600;
+    cursor: pointer; 
+}
+
+button:hover { background: #333; transform: scale(1.02); }
