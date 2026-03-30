@@ -124,3 +124,30 @@ button:hover { background: #333; transform: scale(1.02); }
     color: white;
     transform: translateY(1px);
 }
+
+/* Icon Animations */
+.main-icon-container {
+    font-size: 3rem;
+    margin-bottom: 10px;
+    color: #007bff;
+}
+
+.icon-sun {
+    animation: rotateSun 10s linear infinite;
+    color: #ffb703;
+}
+
+.icon-cloud {
+    animation: floatCloud 3s ease-in-out infinite;
+    color: #8ecae6;
+}
+
+@keyframes rotateSun {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+@keyframes floatCloud {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-5px); }
+}
