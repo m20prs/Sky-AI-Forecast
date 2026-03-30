@@ -118,3 +118,9 @@ button:hover { background: #333; transform: scale(1.02); }
     border-bottom: 2px solid #f0f0f0;
     padding-bottom: 5px;
 }
+
+.tab-btn:active {
+    background: #007bff;
+    color: white;
+    transform: translateY(1px);
+}

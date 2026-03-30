@@ -1,6 +1,6 @@
 const button = document.getElementById('getWeather');
 let globalWeatherData = null;
-let currentCityName = ""; // To remember the city name when switching tabs
+let currentCityDisplay = ""; // Stores "City, Country" for the Current tab
 
 button.addEventListener('click', async () => {
     const city = document.getElementById('cityInput').value;
@@ -9,7 +9,7 @@ button.addEventListener('click', async () => {
     
     if (!city) return;
 
-    display.innerHTML = `<div class="spinner"></div><p>Searching...</p>`;
+    display.innerHTML = `<div class="spinner"></div><p>SkyAI is searching...</p>`;
     options.style.display = "none";
 
     try {
@@ -23,28 +23,29 @@ button.addEventListener('click', async () => {
         }
 
         const { latitude, longitude, name, country } = geoData.results[0];
-        currentCityName = `${name}, ${country}`;
+        currentCityDisplay = `${name}, ${country}`;
 
+        // Fetching 16 days of data
         const weatherUrl = `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current=temperature_2m,relative_humidity_2m&hourly=temperature_2m&daily=temperature_2m_max,temperature_2m_min&forecast_days=16&timezone=auto`;
         
         const weatherRes = await fetch(weatherUrl);
         globalWeatherData = await weatherRes.json();
 
         options.style.display = "flex";
-        showCurrent(); // Call the new function to show the initial view
+        showCurrent(); // Show the main view immediately after loading
 
     } catch (error) {
         display.innerHTML = "Connection error. Please try again.";
     }
 });
 
-// NEW: Function to show the main current weather view
+// Function to switch back to the Current Weather view
 function showCurrent() {
     if (!globalWeatherData) return;
     const display = document.getElementById('weatherDisplay');
     display.innerHTML = `
         <div style="animation: fadeIn 0.5s ease-out;">
-            <p style="color: #888; font-size: 0.8rem; margin-bottom: 0;">${currentCityName}</p>
+            <p style="color: #888; font-size: 0.8rem; margin-bottom: 0;">${currentCityDisplay}</p>
             <h1 style="font-size: 3.5rem; margin: 10px 0; font-weight: 700;">${Math.round(globalWeatherData.current.temperature_2m)}°C</h1>
             <p>Humidity: ${globalWeatherData.current.relative_humidity_2m}%</p>
         </div>
