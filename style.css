@@ -103,3 +103,18 @@ button:hover { background: #333; transform: scale(1.02); }
     border-bottom: 1px solid #eee;
     font-size: 0.9rem;
 }
+
+
+/* Add this to your style.css */
+.tab-btn:active {
+    background: #007bff;
+    color: white;
+}
+
+.forecast-list h3 {
+    font-size: 1rem;
+    color: #1a1a1a;
+    margin-bottom: 15px;
+    border-bottom: 2px solid #f0f0f0;
+    padding-bottom: 5px;
+}
