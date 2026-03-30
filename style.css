@@ -170,3 +170,23 @@ button:hover { background: #333; transform: scale(1.02); }
     0%, 100% { transform: translateY(0); }
     50% { transform: translateY(-5px); }
 }
+
+/* Update this class in your style.css */
+.forecast-item {
+    display: flex;
+    justify-content: space-between; /* Keeps time on left, temp on right */
+    align-items: center;            /* Vertically centers the icon and text */
+    padding: 12px 10px;
+    border-bottom: 1px solid #eee;
+    font-size: 0.9rem;
+}
+
+/* Ensure the icons themselves have a consistent width so they stay centered */
+.forecast-item i, 
+.forecast-item svg {
+    width: 24px;
+    height: 24px;
+    display: flex;
+    justify-content: center;
+    margin: 0 auto; /* Pushes the icon to the center of its available space */
+}

@@ -76,8 +76,16 @@ function show24h() {
                     <span>${temp}°C</span>
                  </div>`;
     }
-    display.innerHTML = html + '</div>';
+    display.innerHTML = html += `
+    <div class="forecast-item">
+        <span style="width: 50px; text-align: left;">${time}</span> 
+        <span style="flex-grow: 1; display: flex; justify-content: center;">
+            ${getWeatherIcon(iconCode)}
+        </span>
+        <span style="width: 50px; text-align: right;">${temp}°C</span>
+    </div>`;
     lucide.createIcons();
+    
 }
 
 function show30d() {
@@ -93,6 +101,15 @@ function show30d() {
                     <span>${Math.round(max)}°C</span>
                  </div>`;
     }
-    display.innerHTML = html + '</div>';
+    display.innerHTML = html += `
+    <div class="forecast-item">
+        <span style="width: 80px; text-align: left;">${date}</span> 
+        <span style="flex-grow: 1; display: flex; justify-content: center;">
+            ${getWeatherIcon(iconCode)}
+        </span>
+        <span style="width: 80px; text-align: right;">
+            <strong>${Math.round(max)}°</strong> / ${Math.round(min)}°
+        </span>
+    </div>`;
     lucide.createIcons();
 }
