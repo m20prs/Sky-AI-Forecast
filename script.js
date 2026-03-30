@@ -110,7 +110,11 @@ function show30d() {
         </div>`;
     }
     
-    display.innerHTML = html + '</div>';
-    l// Initialize the logo icons on page load
-lucide.createIcons();
+display.innerHTML = html + '</div>';
+    lucide.createIcons();
 }
+
+// Initialize the logo icons on page load
+window.onload = () => {
+    lucide.createIcons();
+};
