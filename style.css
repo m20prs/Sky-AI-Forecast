@@ -190,3 +190,47 @@ button:hover { background: #333; transform: scale(1.02); }
     justify-content: center;
     margin: 0 auto; /* Pushes the icon to the center of its available space */
 }
+
+/* Update or add these to your style.css */
+.logo-container {
+    margin-bottom: 20px;
+    perspective: 1000px;
+}
+
+.logo-text {
+    font-size: 2.5rem;
+    color: #1a1a1a;
+    letter-spacing: -1.5px;
+    margin: 0;
+    display: inline-block;
+    animation: titleEntrance 1s ease-out forwards; /* Entrance animation */
+}
+
+.logo-text span {
+    color: #007bff;
+    display: inline-block;
+    position: relative;
+    animation: glowPulse 2s infinite ease-in-out; /* Continuous glow for the 'AI' */
+}
+
+/* Entrance Animation */
+@keyframes titleEntrance {
+    0% {
+        opacity: 0;
+        transform: translateY(-20px) rotateX(-20deg);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) rotateX(0);
+    }
+}
+
+/* AI Glow Pulse */
+@keyframes glowPulse {
+    0%, 100% {
+        text-shadow: 0 0 0px rgba(0, 123, 255, 0);
+    }
+    50% {
+        text-shadow: 0 0 15px rgba(0, 123, 255, 0.5);
+    }
+}
