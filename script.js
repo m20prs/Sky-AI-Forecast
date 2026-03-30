@@ -111,5 +111,6 @@ function show30d() {
     }
     
     display.innerHTML = html + '</div>';
-    lucide.createIcons();
+    l// Initialize the logo icons on page load
+lucide.createIcons();
 }

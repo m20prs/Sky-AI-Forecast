@@ -234,3 +234,56 @@ button:hover { background: #333; transform: scale(1.02); }
         text-shadow: 0 0 15px rgba(0, 123, 255, 0.5);
     }
 }
+
+/* Container for the icons */
+.logo-animation-wrapper {
+    position: relative;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+/* --- SUNSET / SUNRISE ANIMATION --- */
+.sun-icon {
+    width: 40px;
+    height: 40px;
+    color: #ffb703;
+    position: absolute;
+    animation: sunriseSunset 4s ease-in-out infinite;
+    transition: opacity 0.3s;
+}
+
+@keyframes sunriseSunset {
+    0%, 100% { transform: translateY(10px); opacity: 0; } /* Set/Hidden */
+    50% { transform: translateY(-10px); opacity: 1; }    /* Rise/Visible */
+}
+
+/* --- RAIN ON HOVER ANIMATION --- */
+.rain-icon {
+    width: 40px;
+    height: 40px;
+    color: #007bff;
+    position: absolute;
+    opacity: 0; /* Hidden by default */
+    transition: opacity 0.3s ease;
+}
+
+/* When the user hovers over the logo area */
+.logo-animation-wrapper:hover .sun-icon {
+    opacity: 0; /* Hide the sun */
+    animation-play-state: paused;
+}
+
+.logo-animation-wrapper:hover .rain-icon {
+    opacity: 1; /* Show the rain */
+    animation: rainDrip 0.5s linear infinite;
+}
+
+@keyframes rainDrip {
+    0% { transform: translateY(-2px); }
+    50% { transform: translateY(2px); }
+    100% { transform: translateY(-2px); }
+}
