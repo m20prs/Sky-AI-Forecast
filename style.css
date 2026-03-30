@@ -1,9 +1,8 @@
-/* --- 3. LOGO & HEADER ANIMATIONS --- */
+/* --- LOGO LAYOUT --- */
 .logo-container {
-    margin-bottom: 30px;
+    margin-bottom: 40px;
     display: flex;
     justify-content: center;
-    perspective: 1000px;
 }
 
 .logo-animation-wrapper {
@@ -11,7 +10,7 @@
     display: inline-flex;
     align-items: center;
     white-space: nowrap; 
-    padding: 0 60px;     
+    padding: 0 80px; /* Space for the arc start/end */
     cursor: pointer;
 }
 
@@ -21,63 +20,59 @@
     color: #1a1a1a;
     letter-spacing: -1.5px;
     margin: 0;
-    z-index: 2; /* Text stays on top of the icons */
-    animation: titleEntrance 1s ease-out forwards;
+    z-index: 2; /* Keeps text in front of the moving icons */
 }
 
-.logo-text span {
-    color: #007bff;
-    display: inline-block;
-    animation: glowPulse 2s infinite ease-in-out;
-}
+.logo-text span { color: #007bff; }
 
-/* --- 4. WEATHER ICONS (Shared Size and Placement) --- */
-.weather-icon-shared {
+/* --- ICON ARC LOGIC --- */
+.sun-icon, .rain-icon {
     position: absolute;
-    width: 35px;  /* IDENTICAL SIZE */
-    height: 35px; /* IDENTICAL SIZE */
-    z-index: 1;   /* Set behind the text */
-    
-    /* Center the icons vertically in the parent wrapper */
-    top: 50%;
-    transform: translateY(-50%);
-    
-    /* Animation: Apply the arc path and ensure smooth transitions on hover */
-    transition: opacity 0.5s ease;
-    pointer-events: none; /* Prevents the icons from flickering on hover */
+    width: 35px;
+    height: 35px;
+    z-index: 1; /* Icons move behind the text */
+    left: 50%;
+    pointer-events: none;
+    /* Both icons follow the same 6-second arc */
+    animation: weatherArcPath 6s linear infinite;
+    transition: opacity 0.4s ease;
 }
 
 .sun-icon {
     color: #ffb703;
-    opacity: 1; /* SUN IS VISIBLE BY DEFAULT */
+    opacity: 1; /* Sun is visible by default */
 }
 
 .rain-icon {
     color: #007bff;
-    opacity: 0; /* RAIN IS HIDDEN BY DEFAULT */
+    opacity: 0; /* Rain is hidden by default */
 }
 
-/* --- THE ARC PATH ANIMATION --- */
-/* (Wait about 5-10 minutes to verify the path after changing this) */
-@keyframes sunArcPath {
-    0% { transform: translate(-120px, -20px) scale(0.8); opacity: 0; }
-    15% { opacity: 1; }
-    50% { transform: translate(0, -55px) scale(1); opacity: 1; }
-    85% { opacity: 1; }
-    100% { transform: translate(120px, -20px) scale(0.8); opacity: 0; }
-}
-
-/* Define which animation to apply, 6 seconds, linear, and continuous */
-.sun-icon, .rain-icon {
-    animation: sunArcPath 6s linear infinite;
-}
-
-/* --- 5. THE PUNCHY HOVER STATE --- */
-/* When the user hovers over the title */
+/* --- THE HOVER TRANSITION --- */
+/* When hovering over 'SkyAI', the sun hides and the rain appears */
 .logo-animation-wrapper:hover .sun-icon {
-    opacity: 0; /* Sun fades out */
+    opacity: 0;
 }
 
 .logo-animation-wrapper:hover .rain-icon {
-    opacity: 1; /* Rain fades in and takes over the path */
+    opacity: 1;
+}
+
+/* --- THE UNIFIED ARC PATH (Above the text) --- */
+@keyframes weatherArcPath {
+    0% { 
+        transform: translate(-140px, 10px) scale(0.7); 
+        opacity: 0; 
+    }
+    15% { opacity: 1; }
+    50% { 
+        /* -55px ensures the icon stays ABOVE the 'SkyAI' letters */
+        transform: translate(-50%, -55px) scale(1); 
+        opacity: 1; 
+    }
+    85% { opacity: 1; }
+    100% { 
+        transform: translate(140px, 10px) scale(0.7); 
+        opacity: 0; 
+    }
 }
