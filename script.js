@@ -109,12 +109,15 @@ function show30d() {
             </span>
         </div>`;
     }
-    
-display.innerHTML = html + '</div>';
+    // ... existing code above ...
+
+    display.innerHTML = html + '</div>';
     lucide.createIcons();
 }
 
-// Initialize the logo icons on page load
-window.onload = () => {
-    lucide.createIcons();
-};
+// Correct initialization
+window.addEventListener('load', () => {
+    if (typeof lucide !== 'undefined') {
+        lucide.createIcons();
+    }
+});
