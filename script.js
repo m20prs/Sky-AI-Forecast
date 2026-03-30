@@ -66,50 +66,50 @@ function showCurrent() {
 function show24h() {
     const display = document.getElementById('weatherDisplay');
     let html = '<div class="forecast-list"><h3>Next 24 Hours</h3>';
+    
     for (let i = 0; i < 24; i++) {
         const time = new Date(globalWeatherData.hourly.time[i]).getHours() + ":00";
         const temp = globalWeatherData.hourly.temperature_2m[i];
         const iconCode = globalWeatherData.hourly.weather_code[i];
-        html += `<div class="forecast-item">
-                    <span>${time}</span> 
-                    <span>${getWeatherIcon(iconCode)}</span>
-                    <span>${temp}°C</span>
-                 </div>`;
+        
+        // This MUST be inside the loop to use 'time', 'temp', and 'iconCode'
+        html += `
+        <div class="forecast-item">
+            <span style="width: 50px; text-align: left;">${time}</span> 
+            <span style="flex-grow: 1; display: flex; justify-content: center;">
+                ${getWeatherIcon(iconCode)}
+            </span>
+            <span style="width: 50px; text-align: right;">${temp}°C</span>
+        </div>`;
     }
-    display.innerHTML = html += `
-    <div class="forecast-item">
-        <span style="width: 50px; text-align: left;">${time}</span> 
-        <span style="flex-grow: 1; display: flex; justify-content: center;">
-            ${getWeatherIcon(iconCode)}
-        </span>
-        <span style="width: 50px; text-align: right;">${temp}°C</span>
-    </div>`;
-    lucide.createIcons();
     
+    display.innerHTML = html + '</div>';
+    lucide.createIcons();
 }
 
 function show30d() {
     const display = document.getElementById('weatherDisplay');
     let html = '<div class="forecast-list"><h3>16-Day Outlook</h3>';
+    
     for (let i = 0; i < globalWeatherData.daily.time.length; i++) {
         const date = new Date(globalWeatherData.daily.time[i]).toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
         const max = globalWeatherData.daily.temperature_2m_max[i];
+        const min = globalWeatherData.daily.temperature_2m_min[i];
         const iconCode = globalWeatherData.daily.weather_code[i];
-        html += `<div class="forecast-item">
-                    <span>${date}</span> 
-                    <span>${getWeatherIcon(iconCode)}</span>
-                    <span>${Math.round(max)}°C</span>
-                 </div>`;
+        
+        // This MUST be inside the loop to use 'date', 'max', 'min', and 'iconCode'
+        html += `
+        <div class="forecast-item">
+            <span style="width: 80px; text-align: left;">${date}</span> 
+            <span style="flex-grow: 1; display: flex; justify-content: center;">
+                ${getWeatherIcon(iconCode)}
+            </span>
+            <span style="width: 80px; text-align: right;">
+                <strong>${Math.round(max)}°</strong> / ${Math.round(min)}°
+            </span>
+        </div>`;
     }
-    display.innerHTML = html += `
-    <div class="forecast-item">
-        <span style="width: 80px; text-align: left;">${date}</span> 
-        <span style="flex-grow: 1; display: flex; justify-content: center;">
-            ${getWeatherIcon(iconCode)}
-        </span>
-        <span style="width: 80px; text-align: right;">
-            <strong>${Math.round(max)}°</strong> / ${Math.round(min)}°
-        </span>
-    </div>`;
+    
+    display.innerHTML = html + '</div>';
     lucide.createIcons();
 }
